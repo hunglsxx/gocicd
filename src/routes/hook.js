@@ -18,10 +18,12 @@ router.post('/', async function (req, res, next) {
         var refPath = req.body.ref.split('/');
         var gitBranch = refPath[refPath.length - 1];
         var cicdConfig;
+        console.log("Git branch", gitBranch);
         for (var i in projects) {
             if (projects[i].git_http_url == req.body.project.git_http_url
                 && projects[i].git_branch == gitBranch) {
                 cicdConfig = projects[i];
+                console.log("Config:", cicdConfig);
                 break;
             }
         }
