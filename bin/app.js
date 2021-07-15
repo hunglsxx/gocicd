@@ -48,7 +48,7 @@ const config = {
     },
     projects: [
         {
-            git_uri: 'https://gitlab.com/hungls/first-cicd',
+            git_http_url: 'https://gitlab.com/hungls/first-cicd.git',
             git_branch: 'master',
             dir: '/var/www/html/cicd'
         }
