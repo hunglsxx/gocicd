@@ -1,0 +1,24 @@
+{
+    "name": "go-cicd",
+    "version": "0.0.1",
+    "description": "A webhook for gitlab to CICD",
+    "bin": "bin/app.js",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "node bin/app.js"
+    },
+    "author": "Hung Le",
+    "license": "MIT",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "http-errors": "~1.6.3",
+        "minimist": "^1.2.5",
+        "morgan": "~1.9.1",
+        "pluralize": "^8.0.0",
+        "pug": "2.0.0-beta11"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    }
+}
