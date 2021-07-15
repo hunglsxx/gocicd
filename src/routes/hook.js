@@ -11,6 +11,7 @@ async function worker(arg) {
 router.post('/', async function (req, res, next) {
     var projects = req.app.get('projects');
     console.log("POST", req.body);
+    console.log("Project config:", projects);
     if (req.body
         && req.body.ref
         && req.body.project
@@ -18,8 +19,9 @@ router.post('/', async function (req, res, next) {
         var refPath = req.body.ref.split('/');
         var gitBranch = refPath[refPath.length - 1];
         var cicdConfig;
-        console.log("Git branch", gitBranch);
+        console.log("Git branch", gitBranch, "Git http url:", req.body.project.git_http_url);
         for (var i in projects) {
+            console.log("Project config:", projects[i]);
             if (projects[i].git_http_url == req.body.project.git_http_url
                 && projects[i].git_branch == gitBranch) {
                 cicdConfig = projects[i];
