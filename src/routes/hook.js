@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const queue = require('fastq').promise(worker, 1)
+const queue = require('fastq').promise(worker, 1);
+const { execSync } = require('child_process');
 
 async function worker(arg) {
     console.log("In worker", arg);
-    return arg;
+    let cd = execSync(`cd ${arg.dir}`);
+    return cd;
 }
 
 /* POST home page. */
