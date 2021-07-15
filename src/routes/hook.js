@@ -8,7 +8,7 @@ async function worker(arg) {
 }
 
 /* POST home page. */
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
     var projects = req.app.get('projects');
     console.log("POST", req.body);
     if (req.body
