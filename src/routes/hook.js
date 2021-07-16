@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const queue = require('fastq').promise(worker, 1);
-const { spawnSync, execSync } = require('child_process');
+const { spawnSync } = require('child_process');
 var fs = require('fs');
 var YAML = require('yaml');
 
@@ -17,6 +17,7 @@ async function worker(arg) {
         }
         return cd;
     } catch (error) {
+        console.log(error);
         return error;
     }
 }
