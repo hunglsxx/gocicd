@@ -1,12 +1,20 @@
 var express = require('express');
 var router = express.Router();
 const queue = require('fastq').promise(worker, 1);
-const { spawnSync } = require('child_process');
+const { spawnSync, execSync } = require('child_process');
+var fs = require('fs');
+var YAML = require('yaml');
 
 async function worker(arg) {
     try {
         console.log("In worker", arg);
         let cd = spawnSync('git', ['pull', 'origin', arg.git_branch], { cwd: arg.dir });
+        let yamlFile = `${arg.dir}/.go-cicd.yml`;
+        if (fs.execSync(yamlFile)) {
+            const file = fs.readFileSync(yamlFile, 'utf8');
+            const commandList = YAML.parse(file);
+            console.log("From yaml: ", commandList);
+        }
         return cd;
     } catch (error) {
         return error;
