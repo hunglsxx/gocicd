@@ -6,7 +6,7 @@ const { spawnSync } = require('child_process');
 async function worker(arg) {
     try {
         console.log("In worker", arg);
-        let cd = spawnSync('git', ['pull origin', arg.git_branch], { cwd: arg.dir });
+        let cd = spawnSync('git', ['pull', 'origin', arg.git_branch], { cwd: arg.dir });
         return cd;
     } catch (error) {
         return error;
