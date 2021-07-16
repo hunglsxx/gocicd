@@ -12,7 +12,10 @@ vi app.js
 const GoCICDServer = require('go-cicd');
 
 const config = {
-    namespace: "",
+    namespace: "",//name space for hook router. Eg: "v1" => http://localhost:9119/v1/hooks
+    log: {
+        stores: ['file'] // if use stores: ['file'], process logs are write to log file, you can access to file via http://localhost:9119/logs
+    },
     http: {
         port: 9191
     },
@@ -27,11 +30,12 @@ const config = {
         publish: false,
         secret: 'goci2021privatekey'
     },
+    // Multi project per hook
     projects: [
         {
-            git_http_url: 'https://github.com/hunglsxx/gocicd.git',
-            git_branch: 'master',
-            dir: '/var/www/html/cicd'
+            git_http_url: 'https://github.com/hunglsxx/gocicd.git', // your git
+            git_branch: 'master', // your git branch
+            dir: '/var/www/html/cicd' //your code dir
         },
     ]
 };
