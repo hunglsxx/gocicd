@@ -7,6 +7,19 @@
     "scripts": {
         "start": "node bin/app.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hunglsxx/gocicd.git"
+    },
+    "keywords": [
+        "gitlab",
+        "cicd",
+        "hook"
+    ],
+    "bugs": {
+        "url": "https://github.com/hunglsxx/gocicd/issues"
+    },
+    "homepage": "https://github.com/hunglsxx/gocicd#readme",
     "author": "Hung Le",
     "license": "MIT",
     "dependencies": {
