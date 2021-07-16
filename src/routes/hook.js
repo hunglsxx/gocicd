@@ -5,13 +5,17 @@ const { spawnSync } = require('child_process');
 var fs = require('fs');
 var YAML = require('yaml');
 var util = require('../util');
+var path = require('path');
+var md5 = require('md5');
 
 async function worker(arg) {
     try {
-        //console.log("In worker", arg);
-        let cd = spawnSync('git', ['pull', 'origin', arg.git_branch], { cwd: arg.dir });
+        console.log("In worker", arg);
+        let pull = spawnSync('git', ['pull', 'origin', arg.git_branch], { cwd: arg.dir });
         let yamlFile = `${arg.dir}/.go-ci.yml`;
-        var results = {};
+        var results = {
+            'git': pull.stdout.toString()
+        };
         if (fs.existsSync(yamlFile)) {
             const file = fs.readFileSync(yamlFile, 'utf8');
             const commandList = YAML.parse(file);
@@ -21,6 +25,15 @@ async function worker(arg) {
             var deployResult = await util.runScript(deploys, arg);
             results['test'] = testResult;
             results['deploy'] = deployResult;
+        }
+        if (arg.log
+            && arg.log.stores
+            && arg.log.stores.includes('file')) {
+            var file = util.getCurrentTimestamp()
+                + '_' + arg.git_branch
+                + '_' + md5(arg.git_http_url) + ".log";
+
+            await util.writeLog(file, results);
         }
         return results;
     } catch (error) {
@@ -33,6 +46,7 @@ async function worker(arg) {
 router.post('/', async function (req, res, next) {
     try {
         var projects = req.app.get('projects');
+        var log = req.app.get('configs').log;
         if (req.body
             && req.body.ref
             && req.body.project
@@ -43,7 +57,9 @@ router.post('/', async function (req, res, next) {
             for (var i in projects) {
                 if (projects[i].git_http_url == req.body.project.git_http_url
                     && projects[i].git_branch == gitBranch) {
-                    const result = await queue.push(projects[i]);
+                    var jobData = projects[i];
+                    jobData['log'] = log;
+                    const result = await queue.push(jobData);
                     console.log("Worker result:", result);
                     break;
                 }

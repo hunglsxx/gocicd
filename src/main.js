@@ -14,6 +14,7 @@ class GoCICDServer {
         const app = express();
         app.use(cors());
         app.set('projects', this.config.projects);
+        app.set('configs', this.config);
         // view engine setup
         app.set('views', path.join(__dirname, 'views'));
         app.set('view engine', 'pug');

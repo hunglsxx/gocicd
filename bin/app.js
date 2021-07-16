@@ -26,6 +26,9 @@ if (argv.help) {
 
 const config = {
     namespace: argv.namespace,
+    log: {
+        stores: ['file']
+    },
     http: {
         port: argv.http_port,
         mediaroot: __dirname + '/media',

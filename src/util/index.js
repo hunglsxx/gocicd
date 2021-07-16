@@ -24,6 +24,7 @@ module.exports = {
             }
         });
     },
+
     commandParse: async function (key, only, data) {
         try {
             if (data[key] && Object.keys(data[key]).length) {
@@ -40,6 +41,7 @@ module.exports = {
             return null;
         }
     },
+
     runScript: async function (cmds, config) {
         try {
             var results = [];
@@ -59,8 +61,34 @@ module.exports = {
             }
             return results;
         } catch (error) {
-            console.log(error);
             return null;
         }
-    }
+    },
+
+    writeLog: async function (file, data) {
+        try {
+            var dir = path.join(__dirname, '../', 'public') + '/logs';
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+            var contents = "";
+            if (data && Object.keys(data).length) {
+                for (var key in data) {
+                    contents += "\n" + key + "\n" + data[key];
+                }
+            }
+            var filePath = `${dir}/${file}`;
+            return fs.writeFileSync(filePath, contents);
+        } catch (error) {
+            return error
+        }
+    },
+
+    getCurrentTimestamp: function () {
+        return Math.round(new Date().getTime() / 1000);
+    },
+
+    stringToTime: function (str) {
+        return Math.round((Date.parse(str)) / 1000);
+    },
 };
