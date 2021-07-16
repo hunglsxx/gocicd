@@ -22,14 +22,15 @@ class GoCICDServer {
         app.use(logger('dev'));
         app.use(express.json());
         app.use(express.urlencoded({ extended: false }));
-        app.use(express.static(path.join(__dirname, 'public')));
+        app.use('/static', express.static(path.join(__dirname, 'public')));
 
         util.autoloadRoutes(app, path.join(__dirname, 'routes'), ['index'], this.config.namespace);
         app.use('/', indexRouter);
 
         app.listen(this.config.http.port, () => {
+            var namespace = (this.config.namespace.trim() == "") ? "" : "/" + this.config.namespace
             console.log(`CICD app listening at http://localhost:${this.config.http.port}`);
-            console.log(`Your web-hook: http://localhost:${this.config.http.port}/hooks`);
+            console.log(`Your web-hook: http://localhost:${this.config.http.port}${namespace}/hooks`);
         })
 
         // catch 404 and forward to error handler

@@ -1,6 +1,6 @@
 {
     "name": "go-cicd",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A webhook for gitlab to CICD",
     "bin": "bin/app.js",
     "main": "src/main.js",
@@ -24,6 +24,7 @@
     "license": "MIT",
     "dependencies": {
         "cors": "^2.8.5",
+        "directory-tree": "^2.2.9",
         "express": "^4.17.1",
         "fastq": "^1.11.1",
         "http-errors": "~1.6.3",
