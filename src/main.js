@@ -28,6 +28,7 @@ class GoCICDServer {
 
         app.listen(this.config.http.port, () => {
             console.log(`CICD app listening at http://localhost:${this.config.http.port}`);
+            console.log(`Your web-hook: http://localhost:${this.config.http.port}/hooks`);
         })
 
         // catch 404 and forward to error handler

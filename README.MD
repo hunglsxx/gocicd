@@ -14,7 +14,7 @@ const GoCICDServer = require('go-cicd');
 const config = {
     namespace: "",
     http: {
-        port: 91891
+        port: 9191
     },
     https: {
         port: 8443
@@ -33,7 +33,6 @@ const config = {
             git_branch: 'master',
             dir: '/var/www/html/cicd'
         },
-        ...
     ]
 };
 
@@ -43,4 +42,9 @@ goci.run();
 
 ```bash
 node app.js
+```
+
+Add your hook to gitlab webhook: 
+```
+http://localhost:9191/hooks
 ```
