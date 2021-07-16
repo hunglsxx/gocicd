@@ -10,7 +10,7 @@ async function worker(arg) {
         console.log("In worker", arg);
         let cd = spawnSync('git', ['pull', 'origin', arg.git_branch], { cwd: arg.dir });
         let yamlFile = `${arg.dir}/.go-cicd.yml`;
-        if (fs.execSync(yamlFile)) {
+        if (fs.existsSync(yamlFile)) {
             const file = fs.readFileSync(yamlFile, 'utf8');
             const commandList = YAML.parse(file);
             console.log("From yaml: ", commandList);
