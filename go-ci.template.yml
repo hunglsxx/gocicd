@@ -1,0 +1,50 @@
+# Test
+test:
+    test_name_1:
+        # Docker image
+        image: node:latest
+        # Attach Test job to Test stage
+        stage: dev_test
+        # Config to use GitLab Shared Runner with Executor Docker
+        tags:
+            - docker
+        script:
+            - npm install
+            - npm run test
+        # Defines the names of branches and tags the job runs for
+        only:
+            - master
+
+    test_name_2:
+        # Docker image
+        image: node:latest
+        # Attach Test job to Test stage
+        stage: dev_test
+        # Config to use GitLab Shared Runner with Executor Docker
+        tags:
+            - docker
+        script:
+            - npm install
+            - npm run test
+        # Defines the names of branches and tags the job runs for
+        only:
+            - dev
+
+# Deploy dev
+deploy:
+    deploy_name_1:
+        type: deploy
+        # Attach Deploy job to Deploy stage
+        stage: dev
+        # Config to use our Runner with Executor Shell
+        tags:
+            - shell
+        # environment: dev
+        variables:
+            GIT_STRATEGY: clone
+        script:
+            #- npm install
+            #- pm2 restart gopage_server
+            - ls -l
+        only:
+            - master

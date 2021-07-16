@@ -48,3 +48,9 @@ Add your hook to gitlab webhook:
 ```
 http://localhost:9191/hooks
 ```
+
+Copy yml template file to your project dir and change file name to .go-ci.yml
+```
+cp node_modules/go-cicd/go-ci.template.yml your/project/dir/.go-ci.yml
+```
+Define your scripts in .go-ci.yml by yourself.
