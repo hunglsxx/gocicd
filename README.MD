@@ -2,8 +2,8 @@
 ## npm version (recommended)
 
 ```bash
-mkdir nms
-cd nms
+mkdir my-runner
+cd my-runner
 npm install go-cicd
 vi app.js
 ```
@@ -18,17 +18,6 @@ const config = {
     },
     http: {
         port: 9191
-    },
-    https: {
-        port: 8443
-    },
-    auth: {
-        api: true,
-        api_user: 'admin',
-        api_pass: 'admin',
-        play: false,
-        publish: false,
-        secret: 'goci2021privatekey'
     },
     // Multi project per hook
     projects: [
