@@ -45,7 +45,14 @@ module.exports = {
     runScript: async function (cmds, config) {
         try {
             var results = [];
+            var opts = { cwd: config.dir };
             if (cmds && cmds.script && cmds.script.length) {
+                if (cmds.tags
+                    && cmds.tags.length
+                    && cmds.tags.includes('shell')) {
+                    opts['shell'] = true;
+                }
+                console.log(opts);
                 for (var i in cmds.script) {
                     var cmdArray = cmds.script[i].split(" ");
                     var command = cmdArray[0];
@@ -55,7 +62,7 @@ module.exports = {
                             args.push(cmdArray[a]);
                         }
                     }
-                    let rs = spawnSync(command, args, { cwd: config.dir });
+                    let rs = spawnSync(command, args, opts);
                     results.push(rs.stdout.toString());
                 }
             }
