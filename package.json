@@ -1,6 +1,6 @@
 {
     "name": "go-cicd",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "A webhook for gitlab to CICD",
     "bin": "bin/app.js",
     "main": "src/main.js",
