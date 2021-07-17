@@ -52,7 +52,7 @@ module.exports = {
                     && cmds.tags.includes('shell')) {
                     opts['shell'] = true;
                 }
-                console.log(opts);
+                // console.log(opts);
                 for (var i in cmds.script) {
                     var cmdArray = cmds.script[i].split(" ");
                     var command = cmdArray[0];
