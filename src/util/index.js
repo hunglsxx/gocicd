@@ -75,9 +75,8 @@ module.exports = {
     writeLog: async function (file, data) {
         try {
             var dir = path.join(__dirname, '../', 'public') + '/logs';
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir);
-            }
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+            fs.chmodSync(dir, 0777);
             var contents = "";
             if (data && Object.keys(data).length) {
                 for (var key in data) {
